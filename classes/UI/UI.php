@@ -1,19 +1,20 @@
 <?php
 
-
 namespace KateMorley\Grid\UI;
 
 use KateMorley\Grid\State\State;
 
 /** Outputs the user interface. */
-class UI {
-  /**
-   * Outputs the user interface.
-   *
-   * @param State $state The state
-   */
-  public static function output(State $state): void {
-?>
+class UI
+{
+    /**
+     * Outputs the user interface.
+     *
+     * @param State $state The state
+     */
+    public static function output(State $state): void
+    {
+        ?>
 <!DOCTYPE html>
 <html lang="en-gb">
   <head>
@@ -35,10 +36,16 @@ class UI {
     <link rel="canonical" href="https://grid.iamkate.com/">
     <link rel="preload" href="proza-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="proza-light.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="grid.css?<?= filemtime(__DIR__ . '/../../public/grid.css') ?>" type="text/css">
+    <link rel="stylesheet" href="grid.css?<?= filemtime(
+        __DIR__ . "/../../public/grid.css"
+    ) ?>" type="text/css">
     <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="icon" href="favicon.svg?<?= floor(time() / 300) ?>" type="image/svg+xml">
-    <script src="grid.js?<?= filemtime(__DIR__ . '/../../public/grid.js') ?>" defer></script>
+    <link rel="icon" href="favicon.svg?<?= floor(
+        time() / 300
+    ) ?>" type="image/svg+xml">
+    <script src="grid.js?<?= filemtime(
+        __DIR__ . "/../../public/grid.js"
+    ) ?>" defer></script>
   </head>
   <body>
    <main>
@@ -47,7 +54,7 @@ class UI {
           An Griod Nàiseanta: Beò
         </h1>
         <p>
-          ’S e an Griod Nàiseanta an lìonra a tha a’ sgaoileadh dealan air feadh Bhreatainn (dàta ga ùrachadh gach 5 mionaidean) 
+          ’S e an Griod Nàiseanta an lìonra a tha a’ sgaoileadh dealan air feadh Bhreatainn (dàta ga ùrachadh gach 5 mionaidean)
         </p>
       </section>
       <div id="status" class="columns">
@@ -60,10 +67,17 @@ class UI {
       </div>
 <?php Latest::output($state->latest); ?>
 <?php Tabs::output($state); ?>
-      <div class="columns">
-<?php Transition::output($state); ?>
-<?php About::output($state); ?>
+      <div>
+          <!-- pending translation -->
+          <!--
+          <?php Transition::output($state); ?>
+          -->
       </div>
+      <footer>
+          <div>
+              Dàta BMRS © Elexon Limited dlighe-sgrìobhaidh agus dlighe-stòr-dàta 2024.
+          </div>
+      </footer
     </main>
    <dialog>
       <h2></h2>
@@ -73,5 +87,5 @@ class UI {
   </body>
 </html>
 <?php
-  }
+    }
 }

@@ -238,11 +238,16 @@ function update(unscheduled) {
       .then((html) => {
         let update = parser.parseFromString(html, "text/html");
 
-        IDS_TO_UPDATE.forEach((id) =>
-          document
-            .getElementById(id)
-            .replaceChildren(...update.getElementById(id).children),
-        );
+        IDS_TO_UPDATE.forEach((id) => {
+          const ele = document.getElementById(id);
+          if (ele === null) {
+            console.log("could not find element with id " + id);
+          } else {
+            document
+              .getElementById(id)
+              .replaceChildren(...update.getElementById(id).children);
+          }
+        });
 
         hideGraphKey();
 
