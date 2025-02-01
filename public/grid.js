@@ -230,7 +230,10 @@ function update(unscheduled) {
     time--;
   }
 
-  document.querySelector('link[type*="svg"]').href = "favicon.svg?" + time;
+  const favico = document.querySelector('link[type*="svg"]');
+  if (favico !== null) {
+    favico.href = "favicon.svg?" + time;
+  }
 
   if (document.visibilityState === "visible") {
     fetch("?v=" + time)

@@ -2,6 +2,8 @@
 
 This repository contains the source code for [National Grid: Live](https://grid.iamkate.com/).
 
+It has been modified to display the data in Scottish Gaelic. The localisation was carried out for and on behalf of Stòrlann Nàiseanta na Gàidhlig.
+
 ## Development
 
 The development environment uses [Docker](https://www.docker.com/).
@@ -31,6 +33,12 @@ docker compose down
 ## Production
 
 The production environment does not use Docker, instead running directly on the server. PHP 8.3 and a recent version MariaDB or MySQL are required.
+
+Note that for the Stòrlann installation, the files are stored in `[dealanroot]/griod/` and the generated html is in `[dealanroot]/griod/public`.
+
+The server has a cron job set up to run the update script every 5 minutes. This will need to be updated if the directory structure is ever changed.
+
+The WP installation uses a plugin to embed the html from the generated file.
 
 ### Files
 
