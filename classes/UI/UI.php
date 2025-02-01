@@ -21,6 +21,7 @@ class UI
     <title>
       An Griod Nàiseanta: Beò
     </title>
+    <meta charset="utf-8"/>
     <meta name="description" content="Shows the live status of Great Britain’s electric power transmission network in Scottish Gaelic">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="fediverse:creator" content="@kate@fosstodon.org">
@@ -33,9 +34,12 @@ class UI
     <meta property="og:type" content="website">
     <meta property="og:title" content="National Grid: Live">
     <meta property="og:image" content="https://grid.iamkate.com/banner.png">
-    <link rel="canonical" href="https://grid.iamkate.com/">
-    <link rel="preload" href="proza-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="proza-light.woff2" as="font" type="font/woff2" crossorigin>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="grid.css?<?= filemtime(
         __DIR__ . "/../../public/grid.css"
     ) ?>" type="text/css">
@@ -48,6 +52,8 @@ class UI
     ) ?>" defer></script>
   </head>
   <body>
+   <!-- used by WP shortcode plugin to include the html -->
+   <!-- START -->
    <main>
       <section id="introduction">
         <h1>
@@ -84,6 +90,7 @@ class UI
       <form method="dialog"><button><svg viewBox="0 0 30 30"><path d="M6,6 24,24"/><path d="M6,24 24,6"/></svg></button></form>
       <div></div>
     </dialog>
+    <!-- END -->
   </body>
 </html>
 <?php

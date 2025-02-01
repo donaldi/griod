@@ -13,84 +13,93 @@ use KateMorley\Grid\Data\Visits;
 use KateMorley\Grid\UI\Favicon;
 use KateMorley\Grid\UI\UI;
 
+// IONOS servers set to CET which causes time to
+// display wrongly if a tz is not specified.
+date_default_timezone_set("Europe/London");
+
 spl_autoload_register(function ($class) {
-  require_once(
-    __DIR__
-    . '/classes/'
-    . strtr(substr($class, 16), '\\', '/')
-    . '.php'
-  );
+    require_once __DIR__ .
+        "/classes/" .
+        strtr(substr($class, 16), "\\", "/") .
+        ".php";
 });
 
-Environment::load(__DIR__ . '/.env');
+Environment::load(__DIR__ . "/.env");
 
 $database = new Database();
 
-foreach ([
-  'Updating generation… ' => function ($database) {
-    Generation::update($database);
-  },
+foreach (
+    [
+        "Updating generation… " => function ($database) {
+            Generation::update($database);
+        },
 
-  'Updating emissions…  ' => function ($database) {
-    Emissions::update($database);
-  },
+        "Updating emissions…  " => function ($database) {
+            Emissions::update($database);
+        },
 
-  'Updating pricing…    ' => function ($database) {
-    Pricing::update($database);
-  },
+        "Updating pricing…    " => function ($database) {
+            Pricing::update($database);
+        },
 
-  // demand must be updated after other half-hourly data to exclude future data
-  'Updating demand…     ' => function ($database) {
-    Demand::update($database);
-  },
+        // demand must be updated after other half-hourly data to exclude future data
+        "Updating demand…     " => function ($database) {
+            Demand::update($database);
+        },
 
-  'Updating visits…     ' => function ($database) {
-    Visits::update($database);
-  },
+        "Updating visits…     " => function ($database) {
+            Visits::update($database);
+        },
 
-  'Finishing update…    ' => function ($database) {
-    $database->finishUpdate();
-  },
+        "Finishing update…    " => function ($database) {
+            $database->finishUpdate();
+        },
 
-  'Outputting files…    ' => function ($database) {
-    $state = $database->getState();
+        "Outputting files…    " => function ($database) {
+            $state = $database->getState();
 
-    ob_start();
-    UI::output($state);
-    file_put_contents(__DIR__ . '/public/index.html', ob_get_clean(), LOCK_EX);
+            ob_start();
+            UI::output($state);
+            file_put_contents(
+                __DIR__ . "/public/index.html",
+                ob_get_clean(),
+                LOCK_EX
+            );
 
-    file_put_contents(
-      __DIR__ . '/public/favicon.svg',
-      Favicon::create($state->latest->types),
-      LOCK_EX
-    );
-  }
-] as $action => $callback) {
-  echo $action;
+            file_put_contents(
+                __DIR__ . "/public/favicon.svg",
+                Favicon::create($state->latest->types),
+                LOCK_EX
+            );
+        },
+    ]
+    as $action => $callback
+) {
+    echo $action;
 
-  $start = microtime(true);
+    $start = microtime(true);
 
-  try {
-    $callback($database);
+    try {
+        $callback($database);
 
-    echo 'OK';
+        echo "OK";
 
-    $database->clearErrors($action);
-  } catch (DataException $e) {
-    $error = $e->getMessage();
-    echo 'ERROR: ' . $error;
+        $database->clearErrors($action);
+    } catch (DataException $e) {
+        $error = $e->getMessage();
+        echo "ERROR: " . $error;
 
-    if (
-      $database->getErrorCount($action, $error)
-      >= (int)getenv('ERROR_REPORTING_THRESHOLD')
-    ) {
-      $database->clearErrors($action);
+        if (
+            $database->getErrorCount($action, $error) >=
+            (int) getenv("ERROR_REPORTING_THRESHOLD")
+        ) {
+            $database->clearErrors($action);
 
-      if ((int)getenv('ERROR_REPORTING_THRESHOLD') > 0) {
-        trigger_error(trim($action) . ' ' . $error);
-      }
+            if ((int) getenv("ERROR_REPORTING_THRESHOLD") > 0) {
+                trigger_error(trim($action) . " " . $error);
+            }
+        }
     }
-  }
 
-  echo ' (' . sprintf('%0.3f', microtime(true) - $start) . " seconds)\n";
+    echo " (" . sprintf("%0.3f", microtime(true) - $start) . " seconds)\n";
 }
