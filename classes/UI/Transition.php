@@ -3,16 +3,19 @@
 namespace KateMorley\Grid\UI;
 
 use KateMorley\Grid\State\State;
+use KateMorley\Grid\UI\GDate;
 
 /** Outputs the energy transition section. */
-class Transition {
-  /**
-   * Outputs the energy transition section.
-   *
-   * @param State $state The state
-   */
-  public static function output(State $state): void {
-?>
+class Transition
+{
+    /**
+     * Outputs the energy transition section.
+     *
+     * @param State $state The state
+     */
+    public static function output(State $state): void
+    {
+        ?>
         <section id="transition">
           <h2>
             The energy transition
@@ -27,21 +30,25 @@ class Transition {
             At the same time, renewable power generation was steadily rising. Great Britain’s exposed position in the north-east Atlantic makes it one of the best locations in the world for wind power, and the shallow waters of the North Sea host several of the world’s largest offshore wind farms.
           </p>
           <p>
-            New wind power records are set regularly, and between <?= date('g:ia', $state->windRecord->time) ?> and <?= date('g:ia', $state->windRecord->time + 1800) ?> on <?= date('jS F Y', $state->windRecord->time) ?> British wind farms averaged a record <?= Value::formatPower($state->windRecord->power) ?>GW of generation.
+            New wind power records are set regularly, and between <?= GDate::fmt(
+                "g:ia",
+                $state->windRecord->time
+            ) ?>
+            and <?= GDate::fmt(
+                "g:ia",
+                $state->windRecord->time + 1800
+            ) ?> on <?= GDate::fmt("jS F Y", $state->windRecord->time) ?> British wind farms averaged a record <?= Value::formatPower($state->windRecord->power) ?>GW of generation.
           </p>
           <table class="wind-milestones">
             <tr><th>Power</th><th>Date first achieved</th></tr>
-<?php
-
-    foreach ($state->windMilestones as $power => $time) {
-?>
-            <tr><td><?= $power ?><abbr>GW</abbr></td><td><?= date('jS F Y', $time) ?></td></tr>
-<?php
-    }
-
-?>
+<?php foreach ($state->windMilestones as $power => $time) { ?>
+            <tr><td><?= $power ?><abbr>GW</abbr></td><td><?= GDate::fmt(
+    "jS F Y",
+    $time
+) ?></td></tr>
+<?php } ?>
           </table>
         </section>
 <?php
-  }
+    }
 }

@@ -22,7 +22,7 @@ class PieChart {
     $generationPower      = Value::formatTotalPower($datum->demand->getGeneration());
     $generationPercentage = Value::formatPercentage($generation / $demand);
 
-    echo '<div class="pie-chart"><div><div>Generation</div><div class="generation"></div><div><span>';
+    echo '<div class="pie-chart"><div><div>Gintinn</div><div class="generation"></div><div><span>';
     echo $generationPower;
     echo '</span>GW</div><div><span>';
     echo $generationPercentage;

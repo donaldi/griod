@@ -17,10 +17,10 @@ class Tabs {
 ?>
       <section>
         <div role="tablist">
-          <h2 id="tab-day" role="tab" aria-controls="tab-panel-day" aria-selected="true"><span>Past </span>day</h2>
-          <h2 id="tab-week" role="tab" aria-controls="tab-panel-week" aria-selected="false"><span>Past </span>week</h2>
-          <h2 id="tab-year" role="tab" aria-controls="tab-panel-year" aria-selected="false"><span>Past </span>year</h2>
-          <h2 id="tab-all" role="tab" aria-controls="tab-panel-all" aria-selected="false">All<span> time</span></h2>
+          <h2 id="tab-day" role="tab" aria-controls="tab-panel-day" aria-selected="true">Latha mu <span>dheireadh</span></h2>
+          <h2 id="tab-week" role="tab" aria-controls="tab-panel-week" aria-selected="false">Seachdain mu <span>dheireadh</span></h2>
+          <h2 id="tab-year" role="tab" aria-controls="tab-panel-year" aria-selected="false">Bliadhna mu <span>dheireadh</span></h2>
+          <h2 id="tab-all" role="tab" aria-controls="tab-panel-all" aria-selected="false"><span>Ùine</span> gu lèir</h2>
         </div>
         <div id="tab-panel-day" role="tabpanel" aria-labelledby="tab-day" tabindex="0">
 <?php Panel::output('Past day', $state->pastDay, $state->pastDaySeries, $axes, 12, 'g:ia'); ?>

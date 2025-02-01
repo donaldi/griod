@@ -38,23 +38,23 @@ class Panel {
 <?php Tables::output($average); ?>
           </div>
           <div>
-            <h3>Price per MWh</h3>
+            <h3>Prìs gach MWh</h3>
             <?php Graph::output($series, $axes, Datum::PRICE, '£', '', $timeStep, $timeFormat, 2); ?>
           </div>
           <div>
-            <h3>Emissions per kWh</h3>
+            <h3>Eimiseanan gach kWh</h3>
             <?php Graph::output($series, $axes, Datum::EMISSIONS, '', 'g', $timeStep, $timeFormat, 0); ?>
           </div>
           <div>
-            <h3>Demand</h3>
+            <h3>Iarrtas</h3>
             <?php Graph::output($series, $axes, Datum::DEMAND, '', 'GW', $timeStep, $timeFormat, 1); ?>
           </div>
           <div>
-            <h3>Generation</h3>
+            <h3>Gintinn</h3>
             <?php Graph::output($series, $axes, Datum::GENERATION, '', 'GW', $timeStep, $timeFormat, 2); ?>
           </div>
           <div>
-            <h3>Transfers</h3>
+            <h3>Aiseag lùth</h3>
             <?php Graph::output($series, $axes, Datum::TRANSFERS, '', 'GW', $timeStep, $timeFormat, 2); ?>
           </div>
 <?php

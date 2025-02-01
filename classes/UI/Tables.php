@@ -15,7 +15,7 @@ class Tables {
     $demand = $datum->getTotal();
 
 ?>
-            <h3>Generation by type</h3>
+            <h3>Gintinn a rèir seòrsa</h3>
             <table class="sources">
 <?php
 
@@ -26,7 +26,7 @@ class Tables {
 
 ?>
             </table>
-            <h3>Generation by source</h3>
+            <h3>Gintinn a rèir bun</h3>
             <table class="sources">
 <?php
 
@@ -37,7 +37,7 @@ class Tables {
 
 ?>
             </table>
-            <h3>Interconnectors</h3>
+            <h3>Eadar-cheanglaichearan</h3>
             <table class="sources transfers">
 <?php
 
