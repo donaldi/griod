@@ -74,10 +74,7 @@ class UI
 <?php Latest::output($state->latest); ?>
 <?php Tabs::output($state); ?>
       <div>
-          <!-- pending translation -->
-          <!--
           <?php Transition::output($state); ?>
-          -->
       </div>
       <footer>
           <div>
