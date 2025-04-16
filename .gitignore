@@ -1,4 +1,4 @@
-/.env
+/.env*
 /public/favicon.svg
 /public/index.html
 /public/proza-light.woff2
